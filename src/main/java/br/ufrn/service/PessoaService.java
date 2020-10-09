@@ -21,18 +21,30 @@ public class PessoaService {
 		return pessoaRepository.findAll();
 	}
 	
-	public Optional<Pessoa> findOne(Long id) {
+	public Optional<Pessoa> findById(Long id) {
 		return pessoaRepository.findById(id);
 	}
 	
 	@Transactional(readOnly = false)
 	public Pessoa save(Pessoa entity) {
-		return pessoaRepository.save(entity);
+		if(entity.getCpf().equals("000")) {
+			return pessoaRepository.save(entity);
+		}
+		else {
+			entity.setCpf("001");
+			return pessoaRepository.save(entity);
+		}
+		
 	}
 
 	@Transactional(readOnly = false)
 	public void delete(Pessoa entity) {
 		pessoaRepository.delete(entity);
+	}
+	
+	@Transactional(readOnly = false)
+	public void deleteById(Long id) {
+		pessoaRepository.deleteById(id);
 	}
 
 }
