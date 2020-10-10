@@ -25,6 +25,10 @@ public class PessoaService {
 		return pessoaRepository.findById(id);
 	}
 	
+	public Optional<Pessoa> findByEmailAndSenha(String email, String senha) {
+		return pessoaRepository.findByEmailAndSenha(email, senha);
+	}
+	
 	@Transactional(readOnly = false)
 	public Pessoa save(Pessoa entity) {
 		if(entity.getCpf().equals("000")) {
