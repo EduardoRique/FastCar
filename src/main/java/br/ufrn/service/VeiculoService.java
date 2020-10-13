@@ -1,6 +1,7 @@
 package br.ufrn.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,6 +32,10 @@ public class VeiculoService {
 	@Transactional(readOnly = false)
 	public void deleteById(Long id) {
 		veiculoRepository.deleteById(id);
+	}
+
+	public List<Veiculo> findByPessoa(Pessoa pessoa) {
+		return veiculoRepository.findByPessoa(pessoa);
 	}
 
 }

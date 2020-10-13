@@ -20,6 +20,9 @@ public class Servico implements Serializable {
 
 	@Column(name = "nome")
 	private String nome;
+	
+	@Column(name = "descricao")
+	private String descricao;
 
 	@Column(name = "tempoMedio")
 	private String tempoMedio;
@@ -45,6 +48,14 @@ public class Servico implements Serializable {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+	
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 	
 	public String getTempoMedio() {
