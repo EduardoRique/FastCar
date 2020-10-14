@@ -18,7 +18,7 @@ public class OS implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+	protected Long id;
 
 	@Column(name = "nome")
 	private String nome;
