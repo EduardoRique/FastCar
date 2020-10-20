@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.ufrn.model.Pessoa;
 import br.ufrn.repository.PessoaRepository;
+import business.ValidaPessoa;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,6 +17,7 @@ public class PessoaService {
 
 	@Autowired
 	private PessoaRepository pessoaRepository;
+	private ValidaPessoa validaPessoa;
 
 	public List<Pessoa> findAll() {
 		return pessoaRepository.findAll();
@@ -31,12 +33,11 @@ public class PessoaService {
 	
 	@Transactional(readOnly = false)
 	public Pessoa save(Pessoa entity) {
-		if(entity.getCpf().equals("000")) {
+		if(validaPessoa.isCPF(entity.getCpf()) && validaPessoa.isEmail(entity.getEmail())) {
 			return pessoaRepository.save(entity);
 		}
 		else {
-			entity.setCpf("001");
-			return pessoaRepository.save(entity);
+			throw new IllegalArgumentException("Erro no cadastro de pessoa");
 		}
 		
 	}
