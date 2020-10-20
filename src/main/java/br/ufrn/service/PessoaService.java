@@ -17,7 +17,7 @@ public class PessoaService {
 
 	@Autowired
 	private PessoaRepository pessoaRepository;
-	private ValidaPessoa validaPessoa;
+	private ValidaPessoa validaPessoa = new ValidaPessoa();
 
 	public List<Pessoa> findAll() {
 		return pessoaRepository.findAll();
@@ -33,6 +33,7 @@ public class PessoaService {
 	
 	@Transactional(readOnly = false)
 	public Pessoa save(Pessoa entity) {
+		
 		if(validaPessoa.isCPF(entity.getCpf()) && validaPessoa.isEmail(entity.getEmail())) {
 			return pessoaRepository.save(entity);
 		}

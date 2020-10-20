@@ -10,6 +10,9 @@ public class ValidaPessoa {
 	}
 	
 	public boolean isCPF(String CPF) {
+		CPF = CPF.replace( " " , ""); //tira espaço em branco
+		CPF = CPF.replace( "." , ""); //tira ponto
+		CPF = CPF.replace( "-" , ""); //tira hifen
         // considera-se erro CPF's formados por uma sequencia de numeros iguais
         if (CPF.equals("00000000000") ||
             CPF.equals("11111111111") ||
