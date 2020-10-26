@@ -1,5 +1,6 @@
 package br.ufrn.model;
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "os")
@@ -31,8 +34,17 @@ public class OS implements Serializable {
 	private Funcionario funcionario;
 	
 	@ManyToOne
-	@JoinColumn(name="servico_id")
-	private Servico servico;
+	@JoinColumn(name="agendamento_id")
+	private Agendamento agendamento;
+	
+	@Temporal(TemporalType.DATE)
+	private Date data;
+	
+	@Temporal(TemporalType.TIME)
+	private Date time;
+
+	@Column(name = "status")
+	private String status;
 
 	public Long getId() {
 		return id;
@@ -66,13 +78,37 @@ public class OS implements Serializable {
 		this.funcionario = funcionario;
 	}
 
-	public Servico getServico() {
-		return servico;
+	public Agendamento getAgendamento() {
+		return agendamento;
 	}
 
-	public void setServico(Servico servico) {
-		this.servico = servico;
+	public void setAgendamento(Agendamento agendamento) {
+		this.agendamento = agendamento;
 	}
-	
+
+	public Date getData() {
+		return data;
+	}
+
+	public void setData(Date data) {
+		this.data = data;
+	}
+
+	public Date getTime() {
+		return time;
+	}
+
+	public void setTime(Date time) {
+		this.time = time;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
 		
+	
 }
