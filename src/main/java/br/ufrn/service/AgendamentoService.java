@@ -26,7 +26,7 @@ public class AgendamentoService {
 	@Transactional(readOnly = false)
 	public Optional<Agendamento> finishAgendamento(Long id){
 		Optional<Agendamento> agendamento_optional = this.findById(id);
-		if(!agendamento_optional.isEmpty()) {
+		if(agendamento_optional.orElse(null) != null) {
 			Agendamento agendamento = agendamento_optional.get();
 			agendamento.setStatus("Finalizado");
 			this.save(agendamento);
