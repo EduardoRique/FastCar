@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -38,6 +39,7 @@ private final AgendamentoService agendamentoService;
 	@PostMapping("/add")
 	@ResponseStatus(value = HttpStatus.OK)
 	public void addAgendamento(@RequestBody Agendamento agendamento) {
+		agendamento.setStatus("Agendado");
 		agendamentoService.save(agendamento);
 	}
 
@@ -49,6 +51,11 @@ private final AgendamentoService agendamentoService;
 	@GetMapping("/findById/{id}")
 	public Optional<Agendamento> findByIdAgendamento(@PathVariable("id") Long id) {
 		return agendamentoService.findById(id);
+	}
+	
+	@PutMapping("/finish/{id}")
+	public Optional<Agendamento> finishAgendamento(@PathVariable("id") Long id) {
+		return agendamentoService.finishAgendamento(id);
 	}
 
 	@GetMapping("/findByVeiculo")

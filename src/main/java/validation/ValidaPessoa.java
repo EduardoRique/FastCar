@@ -1,4 +1,4 @@
-package business;
+package validation;
 
 import java.util.InputMismatchException;
 import java.util.regex.Matcher;
@@ -80,7 +80,5 @@ public class ValidaPessoa {
 	    }
 	    return isEmailIdValid;
 	}
-	
-	
 
 }

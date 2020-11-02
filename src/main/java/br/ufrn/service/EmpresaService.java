@@ -9,6 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.ufrn.model.Empresa;
 import br.ufrn.repository.EmpresaRepository;
+import validation.ValidaEmpresa;
+import validation.ValidaPessoa;
 
 @Service
 @Transactional(readOnly = true)
@@ -16,6 +18,11 @@ public class EmpresaService {
 
 	@Autowired
 	private EmpresaRepository empresaRepository;
+	private ValidaEmpresa validaEmpresa;
+	
+	public EmpresaService() {
+		validaEmpresa = new ValidaEmpresa();
+	}
 
 	public List<Empresa> findAll() {
 		return empresaRepository.findAll();
@@ -23,7 +30,13 @@ public class EmpresaService {
 	
 	@Transactional(readOnly = false)
 	public Empresa save(Empresa entity) {
-		return empresaRepository.save(entity);
+		
+		if(!validaEmpresa.isCNPJ(entity.getCnpj())) {
+			throw new IllegalArgumentException("CNPJ inválido");
+		}
+		else {
+			return empresaRepository.save(entity);
+		}
 	}
 	
 	public Optional<Empresa> findById(Long id) {

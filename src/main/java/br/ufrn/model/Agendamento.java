@@ -3,6 +3,7 @@ package br.ufrn.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -35,11 +36,11 @@ public class Agendamento implements Serializable {
 	@JoinColumn(name="servico", nullable = false)
 	private Servico servico;
 	
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date data;
 	
-	@Temporal(TemporalType.TIME)
-	private Date time;
+	@Column(name = "status")
+	private String status;
 
 	public Long getId() {
 		return id;
@@ -81,13 +82,14 @@ public class Agendamento implements Serializable {
 		this.data = data;
 	}
 
-	public Date getTime() {
-		return time;
+	public String getStatus() {
+		return status;
 	}
 
-	public void setTime(Date time) {
-		this.time = time;
+	public void setStatus(String status) {
+		this.status = status;
 	}
+
 	
 	
 }

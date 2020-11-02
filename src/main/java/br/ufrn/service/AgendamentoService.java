@@ -24,6 +24,17 @@ public class AgendamentoService {
 	}
 	
 	@Transactional(readOnly = false)
+	public Optional<Agendamento> finishAgendamento(Long id){
+		Optional<Agendamento> agendamento_optional = this.findById(id);
+		if(!agendamento_optional.isEmpty()) {
+			Agendamento agendamento = agendamento_optional.get();
+			agendamento.setStatus("Finalizado");
+			this.save(agendamento);
+		}
+		return agendamento_optional;
+	}
+	
+	@Transactional(readOnly = false)
 	public Agendamento save(Agendamento entity) {
 		return agendamentoRepository.save(entity);
 	}
