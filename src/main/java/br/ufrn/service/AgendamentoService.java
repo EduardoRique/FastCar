@@ -24,11 +24,11 @@ public class AgendamentoService {
 	}
 	
 	@Transactional(readOnly = false)
-	public Optional<Agendamento> finishAgendamento(Long id){
+	public Optional<Agendamento> changeStateAgendamento(Long id, String state){
 		Optional<Agendamento> agendamento_optional = this.findById(id);
 		if(agendamento_optional.orElse(null) != null) {
 			Agendamento agendamento = agendamento_optional.get();
-			agendamento.setStatus("Finalizado");
+			agendamento.setStatus(state);
 			this.save(agendamento);
 		}
 		return agendamento_optional;
