@@ -54,8 +54,8 @@ private final AgendamentoService agendamentoService;
 	}
 	
 	@PutMapping("/changestate/{id}")
-	public Optional<Agendamento> finishAgendamento(@PathVariable("id") Long id, @RequestBody Agendamento agendamento) {
-		return agendamentoService.changeStateAgendamento(id, agendamento.getStatus());
+	public Optional<Agendamento> finishAgendamento(@PathVariable("id") Long id, @RequestBody String status) {
+		return agendamentoService.changeStateAgendamento(id, status);
 	}
 
 	@GetMapping("/findByVeiculo")
